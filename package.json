@@ -1,0 +1,9 @@
+{
+  "name": "newsweb",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "workspaces": ["frontend", "server", "shared"]
+}

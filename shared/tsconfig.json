@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2015",            // Ensure this targets ES2015 or later
+    "lib": ["es2015", "dom"],      // Include necessary libraries
+    "module": "commonjs",          // Use CommonJS or another appropriate module system
+    "moduleResolution": "node",   // Use Node.js module resolution
+    "outDir": "./dist",            // Output directory for compiled files
+    "strict": true,                // Enable strict type checking
+    "esModuleInterop": true,       // Allow interop with ES modules
+    "skipLibCheck": true           // Skip type checking for .d.ts files
+  },
+  "include": ["src/**/*"],          // Adjust to match your source files
+  "exclude": ["node_modules", "dist"] // Exclude unnecessary files
+}
