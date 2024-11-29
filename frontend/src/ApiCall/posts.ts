@@ -10,9 +10,12 @@ import {
   GetCommentListReq,
   GetUserRes,
   GetUserReq,
+  CreatePostRes,
+  Post,
 } from "../shared";
 
 import { CallEndpoint } from ".";
+import { CreatePostReq } from "@newsweb/shared";
 
 export const getPosts = async (): Promise<ListPostRes> => {
   const res = await CallEndpoint<ListPostReq, ListPostRes>(
@@ -67,5 +70,20 @@ export const getPostAuthor = async (userId: string): Promise<GetUserRes> => {
     },
     null
   );
+  return res;
+};
+
+export const createPost = async (
+  postTitle: string,
+  postUrl: string
+): Promise<CreatePostRes> => {
+  const res = await CallEndpoint<Pick<Post, "title" | "url">, CreatePostRes>(
+    ENDPOINT_CONFIG.createPost,
+    {
+      title: postTitle,
+      url: postUrl,
+    }
+  );
+  console.log(res);
   return res;
 };

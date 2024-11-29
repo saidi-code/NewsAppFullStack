@@ -56,7 +56,7 @@ const PostAuthor = ({ userId }: PostAuthorType) => {
           </Text>
         </HStack>
 
-        <Link to={`/profile/${userId}`}>
+        <Link to={`/post/author/profile/${userId}`}>
           <Text
             display="block"
             width="full"

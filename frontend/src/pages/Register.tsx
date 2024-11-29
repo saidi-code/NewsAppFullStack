@@ -54,7 +54,7 @@ const Register = () => {
     }
   }, [navigate]);
   return (
-    <Center height="90vh">
+    <Center height="70vh">
       <Box p="3" width="lg" bg="bg.muted" rounded="md">
         <Text fontWeight={"bold"} textStyle="3xl" mb="4">
           Register

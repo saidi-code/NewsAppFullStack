@@ -12,14 +12,14 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
-const Profile = () => {
+const PostAuthorProfile = () => {
   const { userId } = useParams();
   const { data, error, isLoading } = useQuery(
     [`getauthorprofile${userId}`],
     async () => await getPostAuthor(userId!)
   );
   if (isLoading) return <p> "Loading..."</p>;
-  if (error) return <p> "Loading..."</p>;
+  if (error) return <p> "Error..."</p>;
   const user = data?.user;
   return (
     <div>
@@ -80,4 +80,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default PostAuthorProfile;

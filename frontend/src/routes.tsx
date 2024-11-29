@@ -4,5 +4,5 @@ export const ROUTES = {
   POSTNEW: "/post/new",
   LOGIN: "/login",
   REGISTER: "/register",
-  PROFILE: (userId: string) => `/profile/${userId}`,
+  POSTAUTHORPROFILE: (userId: string) => `/post/author/profile/${userId}`,
 };
