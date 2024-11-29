@@ -12,7 +12,7 @@ export const getCurrentUser = async (userId: string): Promise<GetUserRes> => {
   );
   return res;
 };
-export const getUserPost = async (
+export const getUserPosts = async (
   userId: string
 ): Promise<{ posts: Post[] }> => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,6 +20,18 @@ export const getUserPost = async (
     {
       ...ENDPOINT_CONFIG.getUserPost,
       url: ENDPOINT_CONFIG.getUserPost.url.replace(":userId", userId),
+    },
+    null
+  );
+  return res;
+};
+
+export const getUser = async (userId: string): Promise<GetUserRes> => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const res = await CallEndpoint<GetUserReq, GetUserRes>(
+    {
+      ...ENDPOINT_CONFIG.getUser,
+      url: ENDPOINT_CONFIG.getUser.url.replace(":userId", userId),
     },
     null
   );

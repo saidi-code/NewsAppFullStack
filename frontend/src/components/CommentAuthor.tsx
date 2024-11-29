@@ -5,17 +5,15 @@ import { useQuery } from "@tanstack/react-query";
 import { getUser } from "../ApiCall/user";
 import { Link } from "react-router-dom";
 
-interface PostAuthorType {
+interface CommentAuthorType {
   userId: string;
 }
-
-const PostAuthor = ({ userId }: PostAuthorType) => {
-  const { data, error, isLoading } = useQuery([`getpostauthor${userId}`], () =>
-    getUser(userId)
+const CommentAuthor = ({ userId }: CommentAuthorType) => {
+  const { data, error, isLoading } = useQuery(
+    [`getcommentauthor${userId}`],
+    () => getUser(userId)
   );
-
-  const postAuthor = data?.user;
-
+  const commentAuthor = data?.user;
   // Display a loading skeleton while fetching the data
   if (isLoading) {
     return (
@@ -41,31 +39,32 @@ const PostAuthor = ({ userId }: PostAuthorType) => {
   // Render the post author details
   return (
     <HStack gap="3">
-      {/* postAuthor?.avatarUrl || */}
+      {/* commentAuthor?.avatarUrl || */}
       <Avatar
-        src={`https://placehold.co/600x400?text=${postAuthor?.firstname[0]}+${postAuthor?.firstname[0]}`}
-        name={postAuthor?.firstname || "Unknown"}
+        size="sm"
+        src={`https://placehold.co/600x400?text=${commentAuthor?.firstname[0]}+${commentAuthor?.firstname[0]}`}
+        name={commentAuthor?.firstname || "Unknown"}
       />
       <VStack spacing="0" gap="0">
-        <HStack gap="1" spacing="0">
-          <Text fontWeight="semibold" textStyle="sm">
-            {postAuthor?.firstname || "Anonymous"}
+        <HStack gap="1" justifyContent="start" spacing="0" m="0">
+          <Text fontWeight="semibold" textStyle="xs">
+            {commentAuthor?.firstname || "Anonymous"}
           </Text>
-          <Text fontWeight="semibold" textStyle="sm">
-            {postAuthor?.lastname || "Anonymous"}
+          <Text textAlign="start" fontWeight="semibold" textStyle="xs">
+            {commentAuthor?.lastname || "Anonymous"}
           </Text>
         </HStack>
 
         <Link to={`/post/author/profile/${userId}`}>
           <Text
             display="block"
+            textAlign="start"
             width="full"
-            align="start"
             color="fg.muted"
-            textStyle="sm"
+            textStyle="xs"
             variant="underline"
           >
-            @{postAuthor?.username || "user"}
+            @{commentAuthor?.username || "user"}
           </Text>
         </Link>
       </VStack>
@@ -73,4 +72,4 @@ const PostAuthor = ({ userId }: PostAuthorType) => {
   );
 };
 
-export default PostAuthor;
+export default CommentAuthor;

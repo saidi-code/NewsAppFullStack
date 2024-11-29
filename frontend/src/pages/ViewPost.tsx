@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getPost, getPostComment } from "../ApiCall/posts";
+import { getPost } from "../ApiCall/posts";
+import { getPostComment } from "../ApiCall/comment";
 import PostCompo from "../components/Post";
-import { Box, Center, Stack, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
+import CommentComp from "../components/Comment";
 
 const ViewPost = () => {
   const { postId } = useParams();
@@ -49,18 +51,7 @@ const ViewPost = () => {
       {/* Render comments */}
       {comments && comments.length > 0 ? (
         comments.map((comment, index) => (
-          <Box
-            borderRadius="md"
-            bg="bg.muted"
-            mt="8px"
-            height="100px"
-            width="full"
-            key={index}
-            p={4}
-            borderBottom="1px solid #eaeaea"
-          >
-            <Text>{comment.comment}</Text>
-          </Box>
+          <CommentComp comment={comment} key={comment.id} />
         ))
       ) : (
         <Text fontStyle="md">No comments available.</Text>

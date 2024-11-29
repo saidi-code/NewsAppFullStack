@@ -1,5 +1,5 @@
 import { Badge, Group, Spinner, Separator, Text } from "@chakra-ui/react";
-import { getPostCommentCount } from "../ApiCall/posts";
+import { getPostCommentCount } from "../ApiCall/comment";
 import { useQuery } from "@tanstack/react-query";
 import { FaExclamation } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -26,7 +26,7 @@ const CommentCount = ({ postId }: CommentCountProps) => {
             height="4"
           /> */}
           <Badge p="2" borderRadius="lg">
-            {isLoading && <Spinner color="teal.500" />}
+            {isLoading && <Spinner size="sm" color="teal.500" />}
           </Badge>
         </Group>
       </div>

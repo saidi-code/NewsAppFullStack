@@ -7,6 +7,9 @@ import {
   HStack,
   Stack,
   defineStyle,
+  Separator,
+  Input,
+  Kbd,
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { Avatar } from "./ui/avatar";
@@ -21,6 +24,8 @@ import {
 import { signOut, isLoggedIn } from "../ApiCall/auth";
 import { ROUTES } from "../routes";
 import { useCallback } from "react";
+import { InputGroup } from "./ui/input-group";
+import { LuSearch } from "react-icons/lu";
 const ringCss = defineStyle({
   outlineWidth: "3px",
   outlineColor: "colorPalette.500",
@@ -39,11 +44,13 @@ const Header = () => {
   const user = currentUser?.user;
   return (
     <Box mb="30px" py="4">
-      <Flex justifyContent={"space-between"}>
+      <Flex justifyContent={"space-between"} mb="4">
         <Text fontSize="2xl" fontWeight="bold">
           <Link to="/">LOGO</Link>
         </Text>
-
+        <InputGroup flex="1" startElement={<LuSearch />} maxW="xl">
+          <Input rounded="lg" placeholder="Search " />
+        </InputGroup>
         {isLoggedIn() ? (
           <MenuRoot width="100%">
             <MenuTrigger asChild>
@@ -52,7 +59,7 @@ const Header = () => {
                   css={ringCss}
                   colorPalette="green"
                   name={user?.firstname}
-                  size="md"
+                  size="sm"
                   src="https://images.unsplash.com/photo-1511806754518-53bada35f930"
                 />
                 <Stack gap="0">
@@ -99,6 +106,7 @@ const Header = () => {
           </Flex>
         )}
       </Flex>
+      <Separator />
     </Box>
   );
 };

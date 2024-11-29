@@ -93,7 +93,7 @@ export const ENDPOINT_CONFIG: { [key in endpoints]: endpointConfig } = {
     auth: false,
   },
   [endpoints.createComment]: {
-    url: `/comments`,
+    url: `/comments/:postId`,
     method: "POST",
     auth: true,
   },

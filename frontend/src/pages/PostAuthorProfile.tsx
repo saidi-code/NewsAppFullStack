@@ -1,15 +1,12 @@
-import { getUserPost } from "../ApiCall/user";
-import { getPostAuthor } from "../ApiCall/posts";
-import { Avatar } from "../components/ui/avatar";
+import { getUserPosts, getUser } from "../ApiCall/user";
+
 import {
-  Center,
   HStack,
   Stack,
   Text,
   Image,
   VStack,
   Group,
-  Box,
   Grid,
   GridItem,
 } from "@chakra-ui/react";
@@ -22,7 +19,7 @@ const PostAuthorProfile = () => {
   const { userId } = useParams();
   const { data, error, isLoading } = useQuery(
     [`getauthorprofile${userId}`],
-    async () => await getPostAuthor(userId!)
+    async () => await getUser(userId!)
   );
   const {
     data: userPosts,
@@ -30,7 +27,7 @@ const PostAuthorProfile = () => {
     isLoading: isLoadingUserPosts,
   } = useQuery(
     [`getuserposts${userId}`],
-    async () => await getUserPost(userId!)
+    async () => await getUserPosts(userId!)
   );
   if (isLoading || isLoadingUserPosts) return <p> "Loading..."</p>;
   if (error || errorUserPosts) return <p> "Error..."</p>;

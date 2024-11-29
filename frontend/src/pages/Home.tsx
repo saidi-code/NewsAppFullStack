@@ -17,6 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Post } from "../shared";
 import PostCompo from "../components/Post";
 import { Link } from "react-router-dom";
+import { isLoggedIn } from "../ApiCall/auth";
 const Home = () => {
   const chunks = useHighlight({
     text: "Endless scale, powered by real humans.",
@@ -72,13 +73,20 @@ const Home = () => {
           </Button>
         </Center>
       </Stack>
-      <Float placement="bottom-end">
-        <Link to={"/post/new"}>
-          <IconButton bg="teal" size="xl" aria-label="Add Post" rounded="full">
-            <FaPlus />
-          </IconButton>
-        </Link>
-      </Float>
+      {isLoggedIn() && (
+        <Float placement="bottom-end">
+          <Link to={"/post/new"}>
+            <IconButton
+              bg="teal"
+              size="xl"
+              aria-label="Add Post"
+              rounded="full"
+            >
+              <FaPlus />
+            </IconButton>
+          </Link>
+        </Float>
+      )}
     </>
   );
 };
