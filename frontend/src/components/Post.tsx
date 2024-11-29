@@ -34,6 +34,7 @@ const PostCompo = ({ post }: PostProps) => {
       // bg="bg"
       shadow="sm"
       borderRadius="sm"
+      mb="3"
     >
       <Box color="fg.muted">
         <Flex mb="2" justifyContent="space-between">

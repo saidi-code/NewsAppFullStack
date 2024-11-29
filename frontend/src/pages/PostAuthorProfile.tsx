@@ -1,3 +1,4 @@
+import { getUserPost } from "../ApiCall/user";
 import { getPostAuthor } from "../ApiCall/posts";
 import { Avatar } from "../components/ui/avatar";
 import {
@@ -8,9 +9,14 @@ import {
   Image,
   VStack,
   Group,
+  Box,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import PostCompo from "../components/Post";
+import { Post } from "../shared";
 
 const PostAuthorProfile = () => {
   const { userId } = useParams();
@@ -18,65 +24,59 @@ const PostAuthorProfile = () => {
     [`getauthorprofile${userId}`],
     async () => await getPostAuthor(userId!)
   );
-  if (isLoading) return <p> "Loading..."</p>;
-  if (error) return <p> "Error..."</p>;
+  const {
+    data: userPosts,
+    error: errorUserPosts,
+    isLoading: isLoadingUserPosts,
+  } = useQuery(
+    [`getuserposts${userId}`],
+    async () => await getUserPost(userId!)
+  );
+  if (isLoading || isLoadingUserPosts) return <p> "Loading..."</p>;
+  if (error || errorUserPosts) return <p> "Error..."</p>;
   const user = data?.user;
+  const posts = userPosts?.posts;
   return (
-    <div>
-      <Center>
+    <Grid templateColumns="repeat(4, 1fr)" gap="6">
+      <GridItem colSpan={1}>
         <VStack>
           <Image
-            objectFit="cover"
-            maxW="300px"
+            objectFit=""
+            maxW="200px"
             rounded="sm"
             src="https://images.unsplash.com/photo-1511806754518-53bada35f930?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-            alt="Caffe Latte"
+            alt={user?.firstname}
           />
           <Stack gap="0">
-            <Text
-              textStyle="3xl"
-              color="gray.400"
-              fontSize="3xl"
-              fontWeight="bold"
-            >
+            <Text textStyle="md" color="fg.muted" fontWeight="bold">
               {"@"}
               {user?.username}
             </Text>
             <HStack>
-              <Text
-                color="fg.muted"
-                textStyle="sm"
-                fontSize="xl"
-                fontWeight="bold"
-              >
-                Full Name :
+              <Text color="fg.muted" fontWeight="bold">
+                Name :
               </Text>
               <Group>
-                <Text textStyle="xl" fontSize="xl" fontWeight="bold">
-                  {user?.firstname}{" "}
-                </Text>
-                <Text textStyle="xl" fontSize="xl" fontWeight="bold">
-                  {user?.lastname}
-                </Text>
+                <Text color="fg.muted">{user?.firstname}</Text>
+                <Text color="fg.muted">{user?.lastname}</Text>
               </Group>
             </HStack>
             <HStack>
-              <Text
-                color="fg.muted"
-                textStyle="xl"
-                fontSize="xl"
-                fontWeight="bold"
-              >
+              <Text color="fg.muted" fontWeight="bold">
                 Email :
               </Text>
-              <Text textStyle="xl" fontSize="xl" fontWeight="bold">
-                {user?.email}
-              </Text>
+              <Text color="fg.muted">{user?.email}</Text>
             </HStack>
           </Stack>
         </VStack>
-      </Center>
-    </div>
+      </GridItem>
+      <GridItem colSpan={3}>
+        {posts &&
+          posts?.map((p: Post) => {
+            return <PostCompo key={p.id} post={p} />;
+          })}
+      </GridItem>
+    </Grid>
   );
 };
 

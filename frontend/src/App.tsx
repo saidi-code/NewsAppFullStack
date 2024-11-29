@@ -20,7 +20,7 @@ function App() {
             <Header />
 
             <Center>
-              <Box position="relative" mt="30" maxW="2xl">
+              <Box position="relative" mt="30" maxW="3xl">
                 <Routes>
                   <Route path={ROUTES.HOME} element={<Home />} />
                   <Route path={ROUTES.POST(":postId")} element={<ViewPost />} />

@@ -15,14 +15,18 @@ export enum endpoints {
   createPost = "createPost",
   deletePost = "deletePost",
   updatePost = "updatePost",
-  getPostCommentCount = "getPostCommentCount",
+
+  //user
   getUser = "getUser",
+  getUserPost = "getUserPost",
 
   //comments
   createComment = "createComment",
   getPostCommentList = "postCommentList",
   updateComment = "updateComment",
   deleteComment = "deleteComment",
+  getPostCommentCount = "getPostCommentCount",
+
   //likes
   addLike = "addLike",
   deleteLike = "deleteLike",
@@ -80,6 +84,11 @@ export const ENDPOINT_CONFIG: { [key in endpoints]: endpointConfig } = {
   },
   [endpoints.getUser]: {
     url: `/user/:userId`,
+    method: "GET",
+    auth: false,
+  },
+  [endpoints.getUserPost]: {
+    url: `/user/posts/:userId`,
     method: "GET",
     auth: false,
   },
